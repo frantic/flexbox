@@ -4,30 +4,43 @@
   <title>Flexbox</title>
   <script src="lib/react-0.13.3.js"></script>
   <script src="lib/JSXTransformer-0.13.3.js"></script>
-  <script type="text/javascript">
-    function run() {
-      var code = document.getElementById('code').value;
-      code += 'React.render(<Example />, display);'
-      try {
-        code = JSXTransformer.transform(code).code;
-        eval(code);
-      } catch(e) {
-        console.error(code);
-        console.error(e.message);
-      }
-    }
-  </script>
+  <script src="lib/codemirror-compressed.js"></script>
+  <script src="src/main.js"></script>
+  <link rel="stylesheet" type="text/css" href="lib/codemirror.css">
+  <link rel="stylesheet" type="text/css" href="lib/neo.css">
+  <link rel="stylesheet" type="text/css" href="src/reset.css">
+  <link rel="stylesheet" type="text/css" href="src/ui.css">
 </head>
 <body>
-<textarea id="code">
-  var View = 'div';
-  var Example = React.createClass({
-    render: function() {
-      return <View>Hello world</View>;
-    }
-  });
+<div class="main">
+  <div class="preview">
+    <div class="phone">
+      <div id="display"></div>
+      <div id="error">Ops</div>
+    </div>
+  </div>
+  <div class="code">
+    <textarea id="code">
+var View = 'div';
+var Text = 'span';
+var StyleSheet = {create: function(s) { return s}};
+var Example = React.createClass({
+  render: function() {
+    return (
+      <View style={styles.container}>
+        <Text>Hello!</Text>
+      </View>
+    );
+  }
+});
+
+var styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});
 </textarea>
-<div id="display"></div>
-<button onclick="run()">Run</button>
+  </div>
+</div>
 </body>
 </html>
