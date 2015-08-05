@@ -1,3 +1,7 @@
+var View = 'div';
+var Text = 'span';
+var StyleSheet = {create: function(s) { return s; }};
+
 function run(code) {
   code += 'React.render(<Example />, display);'
   try {
@@ -18,6 +22,7 @@ window.addEventListener('load', function() {
     mode: 'javascript',
     theme: 'neo',
     tabSize: 2,
+    keyMap: 'sublime',
     viewportMargin: Infinity
   });
   editor.focus();

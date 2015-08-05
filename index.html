@@ -21,9 +21,6 @@
   </div>
   <div class="code">
     <textarea id="code">
-var View = 'div';
-var Text = 'span';
-var StyleSheet = {create: function(s) { return s}};
 var Example = React.createClass({
   render: function() {
     return (
@@ -37,6 +34,8 @@ var Example = React.createClass({
 var styles = StyleSheet.create({
   container: {
     flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
 </textarea>
