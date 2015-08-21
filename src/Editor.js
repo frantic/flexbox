@@ -38,15 +38,29 @@ var Editor = React.createClass({
       var keyword = line.substring(start + 1, end);
       this.setState({keyword});
     });
+    this.editor = editor;
   },
 
   render() {
     return (
       <div className="code">
         <textarea id="code" defaultValue={template} />
-        <DocBox keyword={this.state.keyword} />
+        <DocBox
+          keyword={this.state.keyword}
+          onChangeValue={this.editLine}
+        />
       </div>
     );
+  },
+
+  editLine(value) {
+    let {line, ch} = this.editor.getCursor();
+    let original = this.editor.getLine(line);
+    let text = typeof value === 'string' ? `'${value}'` : value + '';
+    let replacement = original.replace(/: .+$/, `: ${text},`);
+    this.editor.replaceRange(replacement, {line, ch: 0}, {line, ch: original.length}, 'cats');
+    this.editor.setCursor({line, ch});
+    this.editor.focus();
   }
 
 });

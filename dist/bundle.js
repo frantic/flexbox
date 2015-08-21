@@ -52,7 +52,7 @@
 
 	var _Editor2 = _interopRequireDefault(_Editor);
 
-	var _Simulator = __webpack_require__(3);
+	var _Simulator = __webpack_require__(4);
 
 	var _Simulator2 = _interopRequireDefault(_Simulator);
 
@@ -130,6 +130,7 @@
 	      var keyword = line.substring(start + 1, end);
 	      _this.setState({ keyword: keyword });
 	    });
+	    this.editor = editor;
 	  },
 
 	  render: function render() {
@@ -137,8 +138,25 @@
 	      'div',
 	      { className: 'code' },
 	      React.createElement('textarea', { id: 'code', defaultValue: template }),
-	      React.createElement(_DocBox2['default'], { keyword: this.state.keyword })
+	      React.createElement(_DocBox2['default'], {
+	        keyword: this.state.keyword,
+	        onChangeValue: this.editLine
+	      })
 	    );
+	  },
+
+	  editLine: function editLine(value) {
+	    var _editor$getCursor = this.editor.getCursor();
+
+	    var line = _editor$getCursor.line;
+	    var ch = _editor$getCursor.ch;
+
+	    var original = this.editor.getLine(line);
+	    var text = typeof value === 'string' ? '\'' + value + '\'' : value + '';
+	    var replacement = original.replace(/: .+$/, ': ' + text + ',');
+	    this.editor.replaceRange(replacement, { line: line, ch: 0 }, { line: line, ch: original.length }, 'cats');
+	    this.editor.setCursor({ line: line, ch: ch });
+	    this.editor.focus();
 	  }
 
 	});
@@ -155,7 +173,7 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _docs = __webpack_require__(4);
+	var _docs = __webpack_require__(3);
 
 	var _docs2 = _interopRequireDefault(_docs);
 
@@ -163,6 +181,8 @@
 	  displayName: 'DocBox',
 
 	  render: function render() {
+	    var _this = this;
+
 	    var help = _docs2['default'][this.props.keyword];
 	    if (!help) {
 	      return null;
@@ -175,7 +195,9 @@
 	        ii !== 0 && ' | ',
 	        React.createElement(
 	          'a',
-	          { href: '#' },
+	          { href: '#', onClick: function () {
+	              return _this.props.onChangeValue(value);
+	            } },
 	          value
 	        )
 	      );
@@ -204,6 +226,31 @@
 
 /***/ },
 /* 3 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	module.exports = {
+	  flexDirection: {
+	    description: 'Shows where to put children',
+	    values: ['row', 'column']
+	  },
+	  alignItems: {
+	    description: 'Used to align stuff',
+	    values: ['flex-start', 'center', 'flex-end']
+	  },
+	  justifyContent: {
+	    description: 'Like alignItems but different',
+	    values: ['flex-start', 'center', 'flex-end']
+	  },
+	  flex: {
+	    description: 'Use all the space',
+	    values: [1, 'auto']
+	  }
+	};
+
+/***/ },
+/* 4 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -254,27 +301,6 @@
 	});
 
 	module.exports = Simulator;
-
-/***/ },
-/* 4 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	module.exports = {
-	  alignItems: {
-	    description: 'Used to align stuff',
-	    values: ['flex-start', 'center', 'flex-end']
-	  },
-	  justifyContent: {
-	    description: 'Like alignItems but different',
-	    values: ['flex-start', 'center', 'flex-end']
-	  },
-	  flex: {
-	    description: 'Use all the space',
-	    values: [1, 'auto']
-	  }
-	};
 
 /***/ }
 /******/ ]);

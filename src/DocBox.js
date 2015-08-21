@@ -10,7 +10,7 @@ var DocBox = React.createClass({
     var values = help.values.map((value, ii) =>
       <span key={value}>
         {ii !== 0 && ' | '}
-        <a href="#">{value}</a>
+        <a href="#" onClick={() => this.props.onChangeValue(value)}>{value}</a>
       </span>
     );
 

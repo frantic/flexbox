@@ -1,4 +1,8 @@
 module.exports = {
+  flexDirection: {
+    description: 'Shows where to put children',
+    values: ['row', 'column'],
+  },
   alignItems: {
     description: 'Used to align stuff',
     values: ['flex-start', 'center', 'flex-end'],
