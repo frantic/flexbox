@@ -1,6 +1,13 @@
+import docs from './docs';
+
 var DocBox = React.createClass({
   render() {
-    var values = ['flex-start', 'center', 'flex-end'].map((value, ii) =>
+    var help = docs[this.props.keyword];
+    if (!help) {
+      return null;
+    }
+
+    var values = help.values.map((value, ii) =>
       <span key={value}>
         {ii !== 0 && ' | '}
         <a href="#">{value}</a>
@@ -12,7 +19,7 @@ var DocBox = React.createClass({
         <strong>{this.props.keyword}</strong>
         <br />
         <br />
-        Defines some cool stuff, lol!
+        {help.description}
         <br />
         <br />
         Values: {values}

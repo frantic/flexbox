@@ -48,7 +48,7 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _Editor = __webpack_require__(2);
+	var _Editor = __webpack_require__(1);
 
 	var _Editor2 = _interopRequireDefault(_Editor);
 
@@ -79,57 +79,13 @@
 
 /***/ },
 /* 1 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	var DocBox = React.createClass({
-	  displayName: 'DocBox',
-
-	  render: function render() {
-	    var values = ['flex-start', 'center', 'flex-end'].map(function (value, ii) {
-	      return React.createElement(
-	        'span',
-	        { key: value },
-	        ii !== 0 && ' | ',
-	        React.createElement(
-	          'a',
-	          { href: '#' },
-	          value
-	        )
-	      );
-	    });
-
-	    return React.createElement(
-	      'div',
-	      { id: 'help' },
-	      React.createElement(
-	        'strong',
-	        null,
-	        this.props.keyword
-	      ),
-	      React.createElement('br', null),
-	      React.createElement('br', null),
-	      'Defines some cool stuff, lol!',
-	      React.createElement('br', null),
-	      React.createElement('br', null),
-	      'Values: ',
-	      values
-	    );
-	  }
-	});
-
-	module.exports = DocBox;
-
-/***/ },
-/* 2 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _DocBox = __webpack_require__(1);
+	var _DocBox = __webpack_require__(2);
 
 	var _DocBox2 = _interopRequireDefault(_DocBox);
 
@@ -192,6 +148,61 @@
 	var template = '\nvar Example = React.createClass({\n  render: function() {\n    return (\n      <View style={styles.container}>\n        <Text>Hello!</Text>\n      </View>\n    );\n  }\n});\n\nvar styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    alignItems: \'center\',\n    justifyContent: \'center\',\n  },\n});\n';
 
 /***/ },
+/* 2 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var _docs = __webpack_require__(4);
+
+	var _docs2 = _interopRequireDefault(_docs);
+
+	var DocBox = React.createClass({
+	  displayName: 'DocBox',
+
+	  render: function render() {
+	    var help = _docs2['default'][this.props.keyword];
+	    if (!help) {
+	      return null;
+	    }
+
+	    var values = help.values.map(function (value, ii) {
+	      return React.createElement(
+	        'span',
+	        { key: value },
+	        ii !== 0 && ' | ',
+	        React.createElement(
+	          'a',
+	          { href: '#' },
+	          value
+	        )
+	      );
+	    });
+
+	    return React.createElement(
+	      'div',
+	      { id: 'help' },
+	      React.createElement(
+	        'strong',
+	        null,
+	        this.props.keyword
+	      ),
+	      React.createElement('br', null),
+	      React.createElement('br', null),
+	      help.description,
+	      React.createElement('br', null),
+	      React.createElement('br', null),
+	      'Values: ',
+	      values
+	    );
+	  }
+	});
+
+	module.exports = DocBox;
+
+/***/ },
 /* 3 */
 /***/ function(module, exports) {
 
@@ -243,6 +254,27 @@
 	});
 
 	module.exports = Simulator;
+
+/***/ },
+/* 4 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	module.exports = {
+	  alignItems: {
+	    description: 'Used to align stuff',
+	    values: ['flex-start', 'center', 'flex-end']
+	  },
+	  justifyContent: {
+	    description: 'Like alignItems but different',
+	    values: ['flex-start', 'center', 'flex-end']
+	  },
+	  flex: {
+	    description: 'Use all the space',
+	    values: [1, 'auto']
+	  }
+	};
 
 /***/ }
 /******/ ]);
