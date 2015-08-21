@@ -30,4 +30,20 @@ window.addEventListener('load', function() {
   editor.on('change', function() {
     run(editor.getValue());
   });
+  editor.on('cursorActivity', function() {
+    var pos = editor.getCursor();
+    var line = editor.getLine(pos.line);
+    for (var end = pos.ch; end < line.length; end++) {
+      if (!line[end].match(/\w/)) {
+        break;
+      }
+    }
+    for (var start = pos.ch - 1; start >= 0; start--) {
+      if (!line[start].match(/\w/)) {
+        break;
+      }
+    }
+    var keyword = line.substring(start + 1, end);
+    help.innerHTML = doc(keyword);
+  });
 });
