@@ -1,5 +1,5 @@
 module.exports = {
-  entry: "./src/docs.js",
+  entry: "./src/DocBox.js",
   output: {
     path: __dirname + "/dist",
     filename: "bundle.js"

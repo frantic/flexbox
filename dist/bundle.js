@@ -47,17 +47,44 @@
 	'use strict';
 
 	function doc(keyword) {
-	  return '<b>' + keyword + '</b>\n\nDefines some cool stuff\n\n<a href="#">center</a> | <a href="#">flex-end</a>';
+
+	  return React.renderToStaticMarkup(React.createElement(DocBox, { keyword: keyword }));
 	}
 
-	var Doc = React.createClass({
-	  displayName: 'Doc',
+	window.doc = doc;
+
+	var DocBox = React.createClass({
+	  displayName: 'DocBox',
 
 	  render: function render() {
+	    var values = ['flex-start', 'center', 'flex-end'].map(function (value, ii) {
+	      return React.createElement(
+	        'span',
+	        { key: value },
+	        ii !== 0 && ' | ',
+	        React.createElement(
+	          'a',
+	          { href: '#' },
+	          value
+	        )
+	      );
+	    });
+
 	    return React.createElement(
 	      'div',
 	      null,
-	      'Hello'
+	      React.createElement(
+	        'strong',
+	        null,
+	        this.props.keyword
+	      ),
+	      React.createElement('br', null),
+	      React.createElement('br', null),
+	      'Defines some cool stuff, lol!',
+	      React.createElement('br', null),
+	      React.createElement('br', null),
+	      'Values: ',
+	      values
 	    );
 	  }
 	});
