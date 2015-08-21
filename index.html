@@ -5,7 +5,6 @@
   <script src="lib/react-0.13.3.js"></script>
   <script src="lib/JSXTransformer-0.13.3.js"></script>
   <script src="lib/codemirror-compressed.js"></script>
-  <script src="src/main.js"></script>
   <script src="dist/bundle.js"></script>
   <link rel="stylesheet" type="text/css" href="lib/codemirror.css">
   <link rel="stylesheet" type="text/css" href="lib/neo.css">
@@ -13,35 +12,5 @@
   <link rel="stylesheet" type="text/css" href="src/ui.css">
 </head>
 <body>
-<div class="main">
-  <div class="preview">
-    <div class="phone">
-      <div id="display"></div>
-      <div id="error">Ops</div>
-    </div>
-  </div>
-  <div class="code">
-    <textarea id="code">
-var Example = React.createClass({
-  render: function() {
-    return (
-      <View style={styles.container}>
-        <Text>Hello!</Text>
-      </View>
-    );
-  }
-});
-
-var styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
-</textarea>
-  <div id="help"></div>
-  </div>
-</div>
 </body>
 </html>

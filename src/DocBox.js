@@ -1,10 +1,3 @@
-function doc(keyword) {
-
-  return React.renderToStaticMarkup(<DocBox keyword={keyword} />);
-}
-
-window.doc = doc;
-
 var DocBox = React.createClass({
   render() {
     var values = ['flex-start', 'center', 'flex-end'].map((value, ii) =>
@@ -15,7 +8,7 @@ var DocBox = React.createClass({
     );
 
     return (
-      <div>
+      <div id="help">
         <strong>{this.props.keyword}</strong>
         <br />
         <br />
@@ -27,3 +20,5 @@ var DocBox = React.createClass({
     );
   }
 });
+
+module.exports = DocBox;

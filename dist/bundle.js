@@ -42,16 +42,46 @@
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	function doc(keyword) {
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	  return React.renderToStaticMarkup(React.createElement(DocBox, { keyword: keyword }));
-	}
+	var _Editor = __webpack_require__(2);
 
-	window.doc = doc;
+	var _Editor2 = _interopRequireDefault(_Editor);
+
+	var _Simulator = __webpack_require__(3);
+
+	var _Simulator2 = _interopRequireDefault(_Simulator);
+
+	var Main = React.createClass({
+	  displayName: 'Main',
+
+	  render: function render() {
+	    var _this = this;
+
+	    return React.createElement(
+	      'div',
+	      { className: 'main' },
+	      React.createElement(_Simulator2['default'], { ref: 'sim' }),
+	      React.createElement(_Editor2['default'], { onChange: function (code) {
+	          return _this.refs.sim.run(code);
+	        } })
+	    );
+	  }
+	});
+
+	window.addEventListener('load', function () {
+	  return React.render(React.createElement(Main, null), document.body);
+	});
+
+/***/ },
+/* 1 */
+/***/ function(module, exports) {
+
+	'use strict';
 
 	var DocBox = React.createClass({
 	  displayName: 'DocBox',
@@ -72,7 +102,7 @@
 
 	    return React.createElement(
 	      'div',
-	      null,
+	      { id: 'help' },
 	      React.createElement(
 	        'strong',
 	        null,
@@ -88,6 +118,131 @@
 	    );
 	  }
 	});
+
+	module.exports = DocBox;
+
+/***/ },
+/* 2 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var _DocBox = __webpack_require__(1);
+
+	var _DocBox2 = _interopRequireDefault(_DocBox);
+
+	var Editor = React.createClass({
+	  displayName: 'Editor',
+
+	  getInitialState: function getInitialState() {
+	    return {
+	      keyword: ''
+	    };
+	  },
+
+	  componentDidMount: function componentDidMount() {
+	    var _this = this;
+
+	    var editor = CodeMirror.fromTextArea(document.getElementById('code'), {
+	      mode: 'javascript',
+	      theme: 'neo',
+	      tabSize: 2,
+	      keyMap: 'sublime',
+	      viewportMargin: Infinity
+	    });
+	    editor.focus();
+	    this.props.onChange(editor.getValue());
+
+	    editor.on('change', function () {
+	      _this.props.onChange(editor.getValue());
+	    });
+	    editor.on('cursorActivity', function () {
+	      var pos = editor.getCursor();
+	      var line = editor.getLine(pos.line);
+	      for (var end = pos.ch; end < line.length; end++) {
+	        if (!line[end].match(/\w/)) {
+	          break;
+	        }
+	      }
+	      for (var start = pos.ch - 1; start >= 0; start--) {
+	        if (!line[start].match(/\w/)) {
+	          break;
+	        }
+	      }
+	      var keyword = line.substring(start + 1, end);
+	      _this.setState({ keyword: keyword });
+	    });
+	  },
+
+	  render: function render() {
+	    return React.createElement(
+	      'div',
+	      { className: 'code' },
+	      React.createElement('textarea', { id: 'code', defaultValue: template }),
+	      React.createElement(_DocBox2['default'], { keyword: this.state.keyword })
+	    );
+	  }
+
+	});
+
+	module.exports = Editor;
+
+	var template = '\nvar Example = React.createClass({\n  render: function() {\n    return (\n      <View style={styles.container}>\n        <Text>Hello!</Text>\n      </View>\n    );\n  }\n});\n\nvar styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    alignItems: \'center\',\n    justifyContent: \'center\',\n  },\n});\n';
+
+/***/ },
+/* 3 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	var View = 'div';
+	var Text = 'span';
+	var StyleSheet = { create: function create(s) {
+	    return s;
+	  } };
+
+	function run(code) {
+	  code += 'React.render(<Example />, display);';
+	  try {
+	    code = JSXTransformer.transform(code).code;
+	    eval(code);
+	    display.style.opacity = 1;
+	    error.innerHTML = '';
+	  } catch (e) {
+	    display.style.opacity = 0.2;
+	    console.error(code);
+	    console.error(e.message);
+	    error.innerHTML = e.message;
+	  }
+	}
+
+	var Simulator = React.createClass({
+	  displayName: 'Simulator',
+
+	  run: run,
+
+	  render: function render() {
+	    return React.createElement(
+	      'div',
+	      { className: 'preview' },
+	      React.createElement(
+	        'div',
+	        { className: 'phone' },
+	        React.createElement('div', { id: 'display' }),
+	        React.createElement(
+	          'div',
+	          { id: 'error' },
+	          'Ops'
+	        )
+	      )
+	    );
+	  }
+
+	});
+
+	module.exports = Simulator;
 
 /***/ }
 /******/ ]);
