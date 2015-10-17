@@ -269,25 +269,31 @@
 /* 5 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
-	Object.defineProperty(exports, "__esModule", {
+	Object.defineProperty(exports, '__esModule', {
 	  value: true
 	});
 
-	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
-	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
 
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	var _ExampleHost = __webpack_require__(9);
 
 	var _ExampleHost2 = _interopRequireDefault(_ExampleHost);
+
+	var _StatusBar = __webpack_require__(12);
+
+	var _StatusBar2 = _interopRequireDefault(_StatusBar);
+
+	var _ReactNativeWeb = __webpack_require__(8);
 
 	var Simulator = (function (_React$Component) {
 	  _inherits(Simulator, _React$Component);
@@ -295,39 +301,23 @@
 	  function Simulator() {
 	    _classCallCheck(this, Simulator);
 
-	    _get(Object.getPrototypeOf(Simulator.prototype), "constructor", this).apply(this, arguments);
+	    _get(Object.getPrototypeOf(Simulator.prototype), 'constructor', this).apply(this, arguments);
 	  }
 
 	  _createClass(Simulator, [{
-	    key: "render",
+	    key: 'render',
 	    value: function render() {
-	      var time = formatTime(new Date());
 	      return React.createElement(
-	        "div",
-	        { className: "preview" },
+	        _ReactNativeWeb.View,
+	        { style: styles.container },
 	        React.createElement(
-	          "div",
-	          { className: "phone" },
-	          React.createElement(
-	            "div",
-	            { className: "status" },
-	            React.createElement(
-	              "span",
-	              null,
-	              "●●●●● React"
-	            ),
-	            React.createElement(
-	              "span",
-	              null,
-	              time
-	            ),
-	            React.createElement(
-	              "span",
-	              null,
-	              "100%"
-	            )
-	          ),
-	          React.createElement(_ExampleHost2["default"], { code: this.props.code })
+	          _ReactNativeWeb.View,
+	          { style: styles.phone },
+	          React.createElement(_StatusBar2['default'], null),
+	          React.createElement(_ExampleHost2['default'], {
+	            style: styles.innerFrame,
+	            code: this.props.code
+	          })
 	        )
 	      );
 	    }
@@ -336,19 +326,32 @@
 	  return Simulator;
 	})(React.Component);
 
-	exports["default"] = Simulator;
+	exports['default'] = Simulator;
 
-	function formatTime(date) {
-	  var hours = date.getHours();
-	  var minutes = date.getMinutes();
-	  if (minutes < 10) {
-	    minutes = '0' + minutes;
+	var styles = _ReactNativeWeb.StyleSheet.create({
+	  container: {
+	    display: 'flex',
+	    flex: 3,
+	    alignItems: 'center',
+	    justifyContent: 'center'
+	  },
+	  phone: {
+	    position: 'relative',
+	    display: 'flex',
+	    width: 320,
+	    height: 568,
+	    borderWidth: 1,
+	    borderColor: '#ccc',
+	    borderStyle: 'solid',
+	    borderRadius: 2,
+	    fontFamily: '"San Francisco", "Helvetica Neue", Helvetica, sans-serif',
+	    fontSize: 12
+	  },
+	  innerFrame: {
+	    paddingTop: _StatusBar2['default'].height
 	  }
-	  return hours + ':' + minutes;
-	}
-
-	module.exports = Simulator;
-	module.exports = exports["default"];
+	});
+	module.exports = exports['default'];
 
 /***/ },
 /* 6 */,
@@ -429,11 +432,77 @@
 	Object.defineProperty(exports, '__esModule', {
 	  value: true
 	});
-	var View = 'div';
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) arr2[i] = arr[i]; return arr2; } else { return Array.from(arr); } }
+
+	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+	function fallback(value1, value2) {
+	  if (typeof value1 !== 'undefined') {
+	    return value1;
+	  } else {
+	    return value2;
+	  }
+	}
+
+	function polyfill(style) {
+	  var computed = {};
+	  for (var key in style) {
+	    var value = style[key];
+	    switch (key) {
+	      case 'paddingVertical':
+	        computed.paddingTop = fallback(style.paddingTop, value);
+	        computed.paddingBottom = fallback(style.paddingBottom, value);
+	        break;
+
+	      case 'paddingHorizontal':
+	        computed.paddingLeft = fallback(style.paddingLeft, value);
+	        computed.paddingRight = fallback(style.paddingRight, value);
+	        break;
+
+	      case 'marginVertical':
+	        computed.marginTop = fallback(style.marginTop, value);
+	        computed.marginBottom = fallback(style.marginBottom, value);
+	        break;
+
+	      case 'marginHorizontal':
+	        computed.marginLeft = fallback(style.marginLeft, value);
+	        computed.marginRight = fallback(style.marginRight, value);
+	        break;
+
+	      default:
+	        computed[key] = value;
+	    }
+	  }
+	  return computed;
+	}
+
+	function styled(Component) {
+	  return React.createClass({
+	    displayName: Component,
+
+	    render: function render() {
+	      var _props = this.props;
+	      var style = _props.style;
+
+	      var props = _objectWithoutProperties(_props, ['style']);
+
+	      if (Array.isArray(style)) {
+	        style = Object.assign.apply(Object, [{}].concat(_toConsumableArray(style)));
+	      }
+
+	      return React.createElement(Component, _extends({ style: polyfill(style) }, props));
+	    }
+	  });
+	}
+
+	var View = styled('div');
 	exports.View = View;
-	var Text = 'span';
+	var Text = styled('span');
 	exports.Text = Text;
-	var Image = 'img';
+	var Image = styled('img');
 	exports.Image = Image;
 	var StyleSheet = { create: function create(s) {
 	    return s;
@@ -442,7 +511,7 @@
 
 /***/ },
 /* 9 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
@@ -457,6 +526,8 @@
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var _ReactNativeWeb = __webpack_require__(8);
 
 	var ExampleHost = (function (_React$Component) {
 	  _inherits(ExampleHost, _React$Component);
@@ -512,15 +583,18 @@
 	    key: 'render',
 	    value: function render() {
 	      if (!this.state.error) {
-	        return React.createElement('div', {
+	        return React.createElement(_ReactNativeWeb.View, {
 	          className: 'display',
+	          style: [styles.takeAllSpace, this.props.style],
 	          dangerouslySetInnerHTML: { __html: this.state.html }
 	        });
 	      }
 
 	      return React.createElement(
-	        'div',
-	        { className: 'error' },
+	        _ReactNativeWeb.View,
+	        {
+	          className: 'error',
+	          style: [styles.takeAllSpace, styles.error, this.props.style] },
 	        this.state.error.message
 	      );
 	    }
@@ -530,6 +604,139 @@
 	})(React.Component);
 
 	exports['default'] = ExampleHost;
+
+	var styles = _ReactNativeWeb.StyleSheet.create({
+	  innerFrame: {
+	    paddingTop: 20
+	  },
+	  takeAllSpace: {
+	    position: 'absolute',
+	    left: 0,
+	    top: 0,
+	    bottom: 0,
+	    right: 0,
+	    overflow: 'hidden'
+	  },
+	  error: {
+	    alignItems: 'center',
+	    justifyContent: 'center',
+	    paddingHorizontal: 30,
+	    color: 'red',
+	    whiteSpace: 'pre-wrap'
+	  }
+	});
+	module.exports = exports['default'];
+
+/***/ },
+/* 10 */,
+/* 11 */,
+/* 12 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var _ReactNativeWeb = __webpack_require__(8);
+
+	var StatusBar = (function (_React$Component) {
+	  _inherits(StatusBar, _React$Component);
+
+	  function StatusBar() {
+	    _classCallCheck(this, StatusBar);
+
+	    _get(Object.getPrototypeOf(StatusBar.prototype), 'constructor', this).apply(this, arguments);
+	  }
+
+	  _createClass(StatusBar, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      var _this = this;
+
+	      this.interval = setInterval(function () {
+	        return _this.forceUpdate();
+	      }, 1000);
+	    }
+	  }, {
+	    key: 'componentWillUnmount',
+	    value: function componentWillUnmount() {
+	      clearInterval(this.interval);
+	    }
+	  }, {
+	    key: 'now',
+	    value: function now() {
+	      var date = new Date();
+	      var hours = date.getHours();
+	      var minutes = date.getMinutes();
+	      if (minutes < 10) {
+	        minutes = '0' + minutes;
+	      }
+	      return hours + ':' + minutes;
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return React.createElement(
+	        _ReactNativeWeb.View,
+	        { style: styles.status },
+	        React.createElement(
+	          _ReactNativeWeb.Text,
+	          { style: [styles.section, styles.network] },
+	          '●●●●● React'
+	        ),
+	        React.createElement(
+	          _ReactNativeWeb.Text,
+	          { style: [styles.section, styles.time] },
+	          this.now()
+	        ),
+	        React.createElement(
+	          _ReactNativeWeb.Text,
+	          { style: [styles.section, styles.info] },
+	          '100%'
+	        )
+	      );
+	    }
+	  }]);
+
+	  return StatusBar;
+	})(React.Component);
+
+	exports['default'] = StatusBar;
+
+	StatusBar.height = 20;
+
+	var styles = _ReactNativeWeb.StyleSheet.create({
+	  status: {
+	    height: StatusBar.height,
+	    display: 'flex',
+	    flex: 1,
+	    flexDirection: 'row'
+	  },
+	  section: {
+	    flex: 1,
+	    padding: 4,
+	    fontWeight: '500'
+	  },
+	  network: {
+	    textAlign: 'left'
+	  },
+	  time: {
+	    textAlign: 'center'
+	  },
+	  info: {
+	    textAlign: 'right'
+	  }
+	});
 	module.exports = exports['default'];
 
 /***/ }

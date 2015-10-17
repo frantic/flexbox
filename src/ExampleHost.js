@@ -1,3 +1,5 @@
+import {View, StyleSheet} from './ReactNativeWeb';
+
 export default class ExampleHost extends React.Component {
 
   constructor() {
@@ -46,18 +48,41 @@ export default class ExampleHost extends React.Component {
   render() {
     if (!this.state.error) {
       return (
-        <div
+        <View
           className="display"
+          style={[styles.takeAllSpace, this.props.style]}
           dangerouslySetInnerHTML={{__html: this.state.html}}
         />
       )
     }
 
     return (
-      <div className="error">
+      <View
+        className="error"
+        style={[styles.takeAllSpace, styles.error, this.props.style]}>
         {this.state.error.message}
-      </div>
+      </View>
     )
   }
 }
 
+var styles = StyleSheet.create({
+  innerFrame: {
+    paddingTop: 20,
+  },
+  takeAllSpace: {
+    position: 'absolute',
+    left: 0,
+    top: 0,
+    bottom: 0,
+    right: 0,
+    overflow: 'hidden',
+  },
+  error: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: 30,
+    color: 'red',
+    whiteSpace: 'pre-wrap',
+  }
+});

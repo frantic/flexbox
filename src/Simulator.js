@@ -1,30 +1,44 @@
 import ExampleHost from './ExampleHost';
+import StatusBar from './StatusBar';
+import {Text, View, StyleSheet} from './ReactNativeWeb';
+
 
 export default class Simulator extends React.Component {
   render() {
-    var time = formatTime(new Date());
     return (
-      <div className="preview">
-        <div className="phone">
-          <div className="status">
-            <span>&#x25cf;&#x25cf;&#x25cf;&#x25cf;&#x25cf; React</span>
-            <span>{time}</span>
-            <span>100%</span>
-          </div>
-          <ExampleHost code={this.props.code} />
-        </div>
-      </div>
+      <View style={styles.container}>
+        <View style={styles.phone}>
+          <StatusBar />
+          <ExampleHost
+            style={styles.innerFrame}
+            code={this.props.code}
+          />
+        </View>
+      </View>
     );
   }
 }
 
-function formatTime(date) {
-  var hours = date.getHours();
-  var minutes = date.getMinutes();
-  if (minutes < 10) {
-    minutes = '0' + minutes;
-  }
-  return hours + ':' + minutes;
-}
-
-module.exports = Simulator;
+var styles = StyleSheet.create({
+  container: {
+    display: 'flex',
+    flex: 3,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  phone: {
+    position: 'relative',
+    display: 'flex',
+    width: 320,
+    height: 568,
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderStyle: 'solid',
+    borderRadius: 2,
+    fontFamily: '"San Francisco", "Helvetica Neue", Helvetica, sans-serif',
+    fontSize: 12,
+  },
+  innerFrame: {
+    paddingTop: StatusBar.height,
+  },
+});
