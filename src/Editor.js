@@ -1,12 +1,12 @@
 import DocBox from './DocBox';
+import {View, StyleSheet} from './ReactNativeWeb';
 
-var Editor = React.createClass({
+export default class Editor extends React.Component {
 
-  getInitialState: function() {
-    return {
-      keyword: '',
-    };
-  },
+  constructor() {
+    super();
+    this.state = {keyword: ''};
+  }
 
   componentDidMount() {
     var editor = CodeMirror.fromTextArea(document.getElementById('code'), {
@@ -38,19 +38,7 @@ var Editor = React.createClass({
       this.setState({keyword});
     });
     this.editor = editor;
-  },
-
-  render() {
-    return (
-      <div className="code">
-        <textarea id="code" defaultValue={this.props.initialCode} />
-        <DocBox
-          keyword={this.state.keyword}
-          onChangeValue={this.editLine}
-        />
-      </div>
-    );
-  },
+  }
 
   editLine(value) {
     let {line, ch} = this.editor.getCursor();
@@ -62,6 +50,30 @@ var Editor = React.createClass({
     this.editor.focus();
   }
 
-});
+  render() {
+    return (
+      <View style={styles.code}>
+        <textarea id="code" defaultValue={this.props.initialCode} />
+        <DocBox
+          keyword={this.state.keyword}
+          onChangeValue={this.editLine}
+        />
+      </View>
+    );
+  }
 
-module.exports = Editor;
+}
+
+var styles = StyleSheet.create({
+  code: {
+    display: 'flex',
+    position: 'relative',
+    flex: 4,
+    backgroundColor: '#F5F5FF',
+    justifyContent: 'center',
+    flexDirection: 'column',
+    overflow: 'scroll',
+    paddingLeft: 20,
+    borderLeft: 'solid 1px #ccc',
+  },
+});

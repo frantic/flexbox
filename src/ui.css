@@ -4,18 +4,6 @@
   flex-direction: row;
 }
 
-.code {
-  display: flex;
-  position: relative;
-  flex: 4;
-  background-color: #F5F5FF;
-  justify-content: center;
-  flex-direction: column;
-  overflow: scroll;
-  padding-left: 20px;
-  border-left: solid 1px #ccc;
-}
-
 .error, .display, .display * {
   display: flex;
   flex-direction: column;
