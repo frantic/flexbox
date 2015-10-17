@@ -1,4 +1,4 @@
-import {Text, View, StyleSheet} from './ReactNativeWeb';
+import {Text, View, StyleSheet} from './react-native-web';
 
 export default class StatusBar extends React.Component {
   componentDidMount() {

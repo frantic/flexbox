@@ -12,11 +12,7 @@ var Main = React.createClass({
   render() {
     return (
       <div className="main">
-        <Simulator code={this.state.code} />
-        <Editor
-          onChange={(code) => this.setState({code})}
-          initialCode={this.state.code}
-        />
+        <ExamplesPage />
       </div>
     );
   }

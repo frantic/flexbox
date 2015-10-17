@@ -1,6 +1,6 @@
 import ExampleHost from './ExampleHost';
 import StatusBar from './StatusBar';
-import {Text, View, StyleSheet} from './ReactNativeWeb';
+import {Text, View, StyleSheet} from './react-native-web';
 
 
 export default class Simulator extends React.Component {

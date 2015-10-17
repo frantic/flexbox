@@ -1,5 +1,5 @@
 import DocBox from './DocBox';
-import {View, StyleSheet} from './ReactNativeWeb';
+import {View, StyleSheet} from './react-native-web';
 
 export default class Editor extends React.Component {
 

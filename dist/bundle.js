@@ -70,18 +70,10 @@
 	  },
 
 	  render: function render() {
-	    var _this = this;
-
 	    return React.createElement(
 	      'div',
 	      { className: 'main' },
-	      React.createElement(_Simulator2['default'], { code: this.state.code }),
-	      React.createElement(_Editor2['default'], {
-	        onChange: function (code) {
-	          return _this.setState({ code: code });
-	        },
-	        initialCode: this.state.code
-	      })
+	      React.createElement(_ExamplesPage2['default'], null)
 	    );
 	  }
 	});
@@ -114,7 +106,7 @@
 
 	var _DocBox2 = _interopRequireDefault(_DocBox);
 
-	var _ReactNativeWeb = __webpack_require__(8);
+	var _reactNativeWeb = __webpack_require__(13);
 
 	var Editor = (function (_React$Component) {
 	  _inherits(Editor, _React$Component);
@@ -180,7 +172,7 @@
 	    key: 'render',
 	    value: function render() {
 	      return React.createElement(
-	        _ReactNativeWeb.View,
+	        _reactNativeWeb.View,
 	        { style: styles.code },
 	        React.createElement('textarea', { id: 'code', defaultValue: this.props.initialCode }),
 	        React.createElement(_DocBox2['default'], {
@@ -196,7 +188,7 @@
 
 	exports['default'] = Editor;
 
-	var styles = _ReactNativeWeb.StyleSheet.create({
+	var styles = _reactNativeWeb.StyleSheet.create({
 	  code: {
 	    display: 'flex',
 	    position: 'relative',
@@ -329,7 +321,7 @@
 
 	var _StatusBar2 = _interopRequireDefault(_StatusBar);
 
-	var _ReactNativeWeb = __webpack_require__(8);
+	var _reactNativeWeb = __webpack_require__(13);
 
 	var Simulator = (function (_React$Component) {
 	  _inherits(Simulator, _React$Component);
@@ -344,10 +336,10 @@
 	    key: 'render',
 	    value: function render() {
 	      return React.createElement(
-	        _ReactNativeWeb.View,
+	        _reactNativeWeb.View,
 	        { style: styles.container },
 	        React.createElement(
-	          _ReactNativeWeb.View,
+	          _reactNativeWeb.View,
 	          { style: styles.phone },
 	          React.createElement(_StatusBar2['default'], null),
 	          React.createElement(_ExampleHost2['default'], {
@@ -364,7 +356,7 @@
 
 	exports['default'] = Simulator;
 
-	var styles = _ReactNativeWeb.StyleSheet.create({
+	var styles = _reactNativeWeb.StyleSheet.create({
 	  container: {
 	    display: 'flex',
 	    flex: 3,
@@ -404,11 +396,17 @@
 
 	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
 
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var _ReactNativeWeb = __webpack_require__(8);
+	var _ExampleHost = __webpack_require__(9);
+
+	var _ExampleHost2 = _interopRequireDefault(_ExampleHost);
+
+	var _reactNativeWeb = __webpack_require__(13);
 
 	var ExampleCard = (function (_React$Component) {
 	  _inherits(ExampleCard, _React$Component);
@@ -422,12 +420,18 @@
 	  _createClass(ExampleCard, [{
 	    key: 'render',
 	    value: function render() {
-	      return React.createElement(_ReactNativeWeb.View, { style: styles.card });
+	      return React.createElement(
+	        _reactNativeWeb.View,
+	        { style: styles.card },
+	        React.createElement(_ExampleHost2['default'], { code: this.props.code })
+	      );
 	    }
 	  }]);
 
 	  return ExampleCard;
 	})(React.Component);
+
+	var examples = [__webpack_require__(11), __webpack_require__(4)];
 
 	var ExamplesPage = (function (_React$Component2) {
 	  _inherits(ExamplesPage, _React$Component2);
@@ -441,7 +445,13 @@
 	  _createClass(ExamplesPage, [{
 	    key: 'render',
 	    value: function render() {
-	      return React.createElement(ExampleCard, null);
+	      return React.createElement(
+	        _reactNativeWeb.View,
+	        { style: styles.container },
+	        examples.map(function (code, idx) {
+	          return React.createElement(ExampleCard, { code: code, key: idx });
+	        })
+	      );
 	    }
 	  }]);
 
@@ -450,17 +460,265 @@
 
 	exports['default'] = ExamplesPage;
 
-	var styles = _ReactNativeWeb.StyleSheet.create({
-	  card: {
-	    width: 100,
-	    height: 100,
+	var styles = _reactNativeWeb.StyleSheet.create({
+	  container: {
+	    display: 'flex',
+	    flex: 1,
+	    flexDirection: 'row',
+	    alignItems: 'center',
+	    justifyContent: 'center',
 	    backgroundColor: '#eee'
+	  },
+	  card: {
+	    width: 300,
+	    height: 300,
+	    margin: 10,
+	    backgroundColor: 'white',
+	    position: 'relative',
+	    fontFamily: '"San Francisco", "Helvetica Neue", Helvetica, sans-serif',
+	    fontSize: 12
 	  }
 	});
 	module.exports = exports['default'];
 
 /***/ },
-/* 8 */
+/* 8 */,
+/* 9 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var _reactNativeWeb = __webpack_require__(13);
+
+	var ExampleHost = (function (_React$Component) {
+	  _inherits(ExampleHost, _React$Component);
+
+	  function ExampleHost() {
+	    _classCallCheck(this, ExampleHost);
+
+	    _get(Object.getPrototypeOf(ExampleHost.prototype), 'constructor', this).call(this);
+	    this.state = { html: null, error: null };
+	  }
+
+	  _createClass(ExampleHost, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      this.evalCode();
+	    }
+	  }, {
+	    key: 'componentDidUpdate',
+	    value: function componentDidUpdate(prevProps) {
+	      if (prevProps.code !== this.props.code) {
+	        this.evalCode();
+	      }
+	    }
+	  }, {
+	    key: 'evalCode',
+	    value: function evalCode() {
+	      var View = 'div';
+	      var Text = 'span';
+	      var Image = 'img';
+	      var StyleSheet = { create: function create(s) {
+	          return s;
+	        } };
+
+	      var code = this.props.code || '';
+	      var className = code.match(/class ([A-Z]\w+) extends React/);
+	      try {
+	        className = className && className[1];
+	        if (!className) {
+	          throw new Error('Could not find React component. Make sure your code has\n\n' + 'class Example extends React.Component');
+	        }
+	        code += '\nReact.renderToStaticMarkup(<' + className + ' />);';
+	        code = JSXTransformer.transform(code).code;
+
+	        this.setState({
+	          html: eval(code),
+	          error: null
+	        });
+	      } catch (error) {
+	        this.setState({ error: error });
+	      }
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      if (!this.state.error) {
+	        return React.createElement(_reactNativeWeb.View, {
+	          className: 'display',
+	          style: [styles.takeAllSpace, this.props.style],
+	          dangerouslySetInnerHTML: { __html: this.state.html }
+	        });
+	      }
+
+	      return React.createElement(
+	        _reactNativeWeb.View,
+	        {
+	          className: 'error',
+	          style: [styles.takeAllSpace, styles.error, this.props.style] },
+	        this.state.error.message
+	      );
+	    }
+	  }]);
+
+	  return ExampleHost;
+	})(React.Component);
+
+	exports['default'] = ExampleHost;
+
+	var styles = _reactNativeWeb.StyleSheet.create({
+	  innerFrame: {
+	    paddingTop: 20
+	  },
+	  takeAllSpace: {
+	    position: 'absolute',
+	    left: 0,
+	    top: 0,
+	    bottom: 0,
+	    right: 0,
+	    overflow: 'hidden'
+	  },
+	  error: {
+	    alignItems: 'center',
+	    justifyContent: 'center',
+	    paddingHorizontal: 30,
+	    color: 'red',
+	    whiteSpace: 'pre-wrap'
+	  }
+	});
+	module.exports = exports['default'];
+
+/***/ },
+/* 10 */,
+/* 11 */
+/***/ function(module, exports) {
+
+	module.exports = "class CenteredTextLabel extends React.Component {\n  render() {\n    return (\n      <View style={styles.container}>\n        <Text>Hello!</Text>\n      </View>\n    );\n  }\n};\n\nvar styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    alignItems: 'center',\n    justifyContent: 'center',\n  },\n});\n"
+
+/***/ },
+/* 12 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var _reactNativeWeb = __webpack_require__(13);
+
+	var StatusBar = (function (_React$Component) {
+	  _inherits(StatusBar, _React$Component);
+
+	  function StatusBar() {
+	    _classCallCheck(this, StatusBar);
+
+	    _get(Object.getPrototypeOf(StatusBar.prototype), 'constructor', this).apply(this, arguments);
+	  }
+
+	  _createClass(StatusBar, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      var _this = this;
+
+	      this.interval = setInterval(function () {
+	        return _this.forceUpdate();
+	      }, 1000);
+	    }
+	  }, {
+	    key: 'componentWillUnmount',
+	    value: function componentWillUnmount() {
+	      clearInterval(this.interval);
+	    }
+	  }, {
+	    key: 'now',
+	    value: function now() {
+	      var date = new Date();
+	      var hours = date.getHours();
+	      var minutes = date.getMinutes();
+	      if (minutes < 10) {
+	        minutes = '0' + minutes;
+	      }
+	      return hours + ':' + minutes;
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return React.createElement(
+	        _reactNativeWeb.View,
+	        { style: styles.status },
+	        React.createElement(
+	          _reactNativeWeb.Text,
+	          { style: [styles.section, styles.network] },
+	          '●●●●● React'
+	        ),
+	        React.createElement(
+	          _reactNativeWeb.Text,
+	          { style: [styles.section, styles.time] },
+	          this.now()
+	        ),
+	        React.createElement(
+	          _reactNativeWeb.Text,
+	          { style: [styles.section, styles.info] },
+	          '100%'
+	        )
+	      );
+	    }
+	  }]);
+
+	  return StatusBar;
+	})(React.Component);
+
+	exports['default'] = StatusBar;
+
+	StatusBar.height = 20;
+
+	var styles = _reactNativeWeb.StyleSheet.create({
+	  status: {
+	    height: StatusBar.height,
+	    display: 'flex',
+	    flex: 1,
+	    flexDirection: 'row'
+	  },
+	  section: {
+	    flex: 1,
+	    padding: 4,
+	    fontWeight: '500'
+	  },
+	  network: {
+	    textAlign: 'left'
+	  },
+	  time: {
+	    textAlign: 'center'
+	  },
+	  info: {
+	    textAlign: 'right'
+	  }
+	});
+	module.exports = exports['default'];
+
+/***/ },
+/* 13 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -544,236 +802,6 @@
 	    return s;
 	  } };
 	exports.StyleSheet = StyleSheet;
-
-/***/ },
-/* 9 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, '__esModule', {
-	  value: true
-	});
-
-	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-
-	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var _ReactNativeWeb = __webpack_require__(8);
-
-	var ExampleHost = (function (_React$Component) {
-	  _inherits(ExampleHost, _React$Component);
-
-	  function ExampleHost() {
-	    _classCallCheck(this, ExampleHost);
-
-	    _get(Object.getPrototypeOf(ExampleHost.prototype), 'constructor', this).call(this);
-	    this.state = { html: null, error: null };
-	  }
-
-	  _createClass(ExampleHost, [{
-	    key: 'componentDidMount',
-	    value: function componentDidMount() {
-	      this.evalCode();
-	    }
-	  }, {
-	    key: 'componentDidUpdate',
-	    value: function componentDidUpdate(prevProps) {
-	      if (prevProps.code !== this.props.code) {
-	        this.evalCode();
-	      }
-	    }
-	  }, {
-	    key: 'evalCode',
-	    value: function evalCode() {
-	      var View = 'div';
-	      var Text = 'span';
-	      var Image = 'img';
-	      var StyleSheet = { create: function create(s) {
-	          return s;
-	        } };
-
-	      var code = this.props.code || '';
-	      var className = code.match(/class ([A-Z]\w+) extends React/);
-	      try {
-	        className = className && className[1];
-	        if (!className) {
-	          throw new Error('Could not find React component. Make sure your code has\n\n' + 'class Example extends React.Component');
-	        }
-	        code += '\nReact.renderToStaticMarkup(<' + className + ' />);';
-	        code = JSXTransformer.transform(code).code;
-
-	        this.setState({
-	          html: eval(code),
-	          error: null
-	        });
-	      } catch (error) {
-	        this.setState({ error: error });
-	      }
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      if (!this.state.error) {
-	        return React.createElement(_ReactNativeWeb.View, {
-	          className: 'display',
-	          style: [styles.takeAllSpace, this.props.style],
-	          dangerouslySetInnerHTML: { __html: this.state.html }
-	        });
-	      }
-
-	      return React.createElement(
-	        _ReactNativeWeb.View,
-	        {
-	          className: 'error',
-	          style: [styles.takeAllSpace, styles.error, this.props.style] },
-	        this.state.error.message
-	      );
-	    }
-	  }]);
-
-	  return ExampleHost;
-	})(React.Component);
-
-	exports['default'] = ExampleHost;
-
-	var styles = _ReactNativeWeb.StyleSheet.create({
-	  innerFrame: {
-	    paddingTop: 20
-	  },
-	  takeAllSpace: {
-	    position: 'absolute',
-	    left: 0,
-	    top: 0,
-	    bottom: 0,
-	    right: 0,
-	    overflow: 'hidden'
-	  },
-	  error: {
-	    alignItems: 'center',
-	    justifyContent: 'center',
-	    paddingHorizontal: 30,
-	    color: 'red',
-	    whiteSpace: 'pre-wrap'
-	  }
-	});
-	module.exports = exports['default'];
-
-/***/ },
-/* 10 */,
-/* 11 */,
-/* 12 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, '__esModule', {
-	  value: true
-	});
-
-	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-
-	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var _ReactNativeWeb = __webpack_require__(8);
-
-	var StatusBar = (function (_React$Component) {
-	  _inherits(StatusBar, _React$Component);
-
-	  function StatusBar() {
-	    _classCallCheck(this, StatusBar);
-
-	    _get(Object.getPrototypeOf(StatusBar.prototype), 'constructor', this).apply(this, arguments);
-	  }
-
-	  _createClass(StatusBar, [{
-	    key: 'componentDidMount',
-	    value: function componentDidMount() {
-	      var _this = this;
-
-	      this.interval = setInterval(function () {
-	        return _this.forceUpdate();
-	      }, 1000);
-	    }
-	  }, {
-	    key: 'componentWillUnmount',
-	    value: function componentWillUnmount() {
-	      clearInterval(this.interval);
-	    }
-	  }, {
-	    key: 'now',
-	    value: function now() {
-	      var date = new Date();
-	      var hours = date.getHours();
-	      var minutes = date.getMinutes();
-	      if (minutes < 10) {
-	        minutes = '0' + minutes;
-	      }
-	      return hours + ':' + minutes;
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      return React.createElement(
-	        _ReactNativeWeb.View,
-	        { style: styles.status },
-	        React.createElement(
-	          _ReactNativeWeb.Text,
-	          { style: [styles.section, styles.network] },
-	          '●●●●● React'
-	        ),
-	        React.createElement(
-	          _ReactNativeWeb.Text,
-	          { style: [styles.section, styles.time] },
-	          this.now()
-	        ),
-	        React.createElement(
-	          _ReactNativeWeb.Text,
-	          { style: [styles.section, styles.info] },
-	          '100%'
-	        )
-	      );
-	    }
-	  }]);
-
-	  return StatusBar;
-	})(React.Component);
-
-	exports['default'] = StatusBar;
-
-	StatusBar.height = 20;
-
-	var styles = _ReactNativeWeb.StyleSheet.create({
-	  status: {
-	    height: StatusBar.height,
-	    display: 'flex',
-	    flex: 1,
-	    flexDirection: 'row'
-	  },
-	  section: {
-	    flex: 1,
-	    padding: 4,
-	    fontWeight: '500'
-	  },
-	  network: {
-	    textAlign: 'left'
-	  },
-	  time: {
-	    textAlign: 'center'
-	  },
-	  info: {
-	    textAlign: 'right'
-	  }
-	});
-	module.exports = exports['default'];
 
 /***/ }
 /******/ ]);

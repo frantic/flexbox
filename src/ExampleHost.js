@@ -1,4 +1,4 @@
-import {View, StyleSheet} from './ReactNativeWeb';
+import {View, StyleSheet} from './react-native-web';
 
 export default class ExampleHost extends React.Component {
 
