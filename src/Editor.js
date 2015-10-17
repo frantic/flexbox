@@ -68,25 +68,4 @@ var Editor = React.createClass({
 module.exports = Editor;
 
 
-var template = `
-var Example = React.createClass({
-  render: function() {
-    return (
-      <View style={styles.container}>
-        <Text>Hello!</Text>
-      </View>
-    );
-  }
-});
-
-var styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
-`;
-
-
-
+var template = require('raw!./examples/ListViewItem');

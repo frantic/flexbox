@@ -52,7 +52,7 @@
 
 	var _Editor2 = _interopRequireDefault(_Editor);
 
-	var _Simulator = __webpack_require__(4);
+	var _Simulator = __webpack_require__(5);
 
 	var _Simulator2 = _interopRequireDefault(_Simulator);
 
@@ -163,7 +163,7 @@
 
 	module.exports = Editor;
 
-	var template = '\nvar Example = React.createClass({\n  render: function() {\n    return (\n      <View style={styles.container}>\n        <Text>Hello!</Text>\n      </View>\n    );\n  }\n});\n\nvar styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    alignItems: \'center\',\n    justifyContent: \'center\',\n  },\n});\n';
+	var template = __webpack_require__(4);
 
 /***/ },
 /* 2 */
@@ -253,17 +253,29 @@
 /* 4 */
 /***/ function(module, exports) {
 
+	module.exports = "class ListViewItem extends React.Component {\n  render() {\n    return (\n      <View style={styles.item}>\n        <Image style={styles.icon} />\n        <View style={styles.content}>\n          <Text style={styles.title}>\n            List item title\n          </Text>\n          <Text style={styles.description}>\n            Here goes description\n          </Text>\n        </View>\n      </View>\n    );\n  }\n};\n\nvar IMAGE_SIZE = 60;\n\nvar styles = StyleSheet.create({\n  item: {\n    padding: 10,\n    flexDirection: 'row',\n    justifyContent: 'center',\n  },\n  icon: {\n    width: IMAGE_SIZE,\n    height: IMAGE_SIZE,\n    backgroundColor: '#336699',\n    marginRight: 10,\n  },\n  content: {\n    flex: 1,\n    justifyContent: 'center',\n  },\n  title: {\n    fontWeight: 'bold',\n  },\n  description: {\n    paddingTop: 4,\n    color: '#777',\n  }\n});\n"
+
+/***/ },
+/* 5 */
+/***/ function(module, exports) {
+
 	'use strict';
 
 	var View = 'div';
 	var Text = 'span';
+	var Image = 'img';
 	var StyleSheet = { create: function create(s) {
 	    return s;
 	  } };
 
 	function run(code) {
-	  code += 'React.render(<Example />, display);';
+	  var className = code.match(/class ([A-Z]\w+) extends React/);
 	  try {
+	    className = className && className[1];
+	    if (!className) {
+	      throw new Error('Could not find React component. Make sure your code has\n\n' + 'class Example extends React.Component');
+	    }
+	    code += '\nReact.render(<' + className + ' />, display);';
 	    code = JSXTransformer.transform(code).code;
 	    eval(code);
 	    display.style.opacity = 1;
@@ -282,12 +294,32 @@
 	  run: run,
 
 	  render: function render() {
+	    var time = formatTime(new Date());
 	    return React.createElement(
 	      'div',
 	      { className: 'preview' },
 	      React.createElement(
 	        'div',
 	        { className: 'phone' },
+	        React.createElement(
+	          'div',
+	          { className: 'status' },
+	          React.createElement(
+	            'span',
+	            null,
+	            '●●●●● React'
+	          ),
+	          React.createElement(
+	            'span',
+	            null,
+	            time
+	          ),
+	          React.createElement(
+	            'span',
+	            null,
+	            '100%'
+	          )
+	        ),
 	        React.createElement('div', { id: 'display' }),
 	        React.createElement(
 	          'div',
@@ -299,6 +331,15 @@
 	  }
 
 	});
+
+	function formatTime(date) {
+	  var hours = date.getHours();
+	  var minutes = date.getMinutes();
+	  if (minutes < 10) {
+	    minutes = '0' + minutes;
+	  }
+	  return hours + ':' + minutes;
+	}
 
 	module.exports = Simulator;
 

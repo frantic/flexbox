@@ -7,11 +7,15 @@ var DocBox = React.createClass({
       return null;
     }
 
-    var values = help.values.map((value, ii) =>
-      <span key={value}>
-        {ii !== 0 && ' | '}
-        <a href="#" onClick={() => this.props.onChangeValue(value)}>{value}</a>
-      </span>
+    var values = help.values.map(
+      (value, ii) => (
+        <span key={value}>
+          {ii !== 0 && ' | '}
+          <a href="#" onClick={() => this.props.onChangeValue(value)}>
+            {value}
+          </a>
+        </span>
+      )
     );
 
     return (
