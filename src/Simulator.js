@@ -1,35 +1,6 @@
-var View = 'div';
-var Text = 'span';
-var Image = 'img';
-var StyleSheet = {create: function(s) { return s; }};
+import ExampleHost from './ExampleHost';
 
-function run(code) {
-  var className = code.match(/class ([A-Z]\w+) extends React/);
-  try {
-    className = className && className[1];
-    if (!className) {
-      throw new Error(
-        'Could not find React component. Make sure your code has\n\n' +
-        'class Example extends React.Component'
-      );
-    }
-    code += `\nReact.render(<${className} />, display);`
-    code = JSXTransformer.transform(code).code;
-    eval(code);
-    display.style.opacity = 1;
-    error.innerHTML = '';
-  } catch(e) {
-    display.style.opacity = 0.2;
-    console.error(code);
-    console.error(e.message);
-    error.innerHTML = e.message;
-  }
-}
-
-var Simulator = React.createClass({
-
-  run,
-
+export default class Simulator extends React.Component {
   render() {
     var time = formatTime(new Date());
     return (
@@ -40,14 +11,12 @@ var Simulator = React.createClass({
             <span>{time}</span>
             <span>100%</span>
           </div>
-          <div id="display"></div>
-          <div id="error">Ops</div>
+          <ExampleHost code={this.props.code} />
         </div>
       </div>
     );
   }
-
-});
+}
 
 function formatTime(date) {
   var hours = date.getHours();

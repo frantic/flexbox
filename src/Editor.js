@@ -17,7 +17,6 @@ var Editor = React.createClass({
       viewportMargin: Infinity
     });
     editor.focus();
-    this.props.onChange(editor.getValue());
 
     editor.on('change', () => {
       this.props.onChange(editor.getValue());
@@ -44,7 +43,7 @@ var Editor = React.createClass({
   render() {
     return (
       <div className="code">
-        <textarea id="code" defaultValue={template} />
+        <textarea id="code" defaultValue={this.props.initialCode} />
         <DocBox
           keyword={this.state.keyword}
           onChangeValue={this.editLine}
@@ -66,6 +65,3 @@ var Editor = React.createClass({
 });
 
 module.exports = Editor;
-
-
-var template = require('raw!./examples/ListViewItem');
