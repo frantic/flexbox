@@ -1,3 +1,4 @@
+import React from 'react'
 import DocBox from './DocBox';
 import {View, StyleSheet} from './react-native-web';
 

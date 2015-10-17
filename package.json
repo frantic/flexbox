@@ -24,6 +24,9 @@
     "webpack": "^1.11.0"
   },
   "dependencies": {
-    "raw-loader": "^0.5.1"
+    "history": "^1.12.5",
+    "raw-loader": "^0.5.1",
+    "react": "^0.13.3",
+    "react-router": "^1.0.0-rc3"
   }
 }

@@ -1,3 +1,4 @@
+import React from 'react'
 import {Text, View, StyleSheet} from './react-native-web';
 
 export default class StatusBar extends React.Component {
@@ -42,7 +43,6 @@ var styles = StyleSheet.create({
   status: {
     height: StatusBar.height,
     display: 'flex',
-    flex: 1,
     flexDirection: 'row',
   },
   section: {

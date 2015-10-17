@@ -1,4 +1,7 @@
+import React from 'react'
+import { Router, Route, Link } from 'react-router'
 import ExampleHost from './ExampleHost';
+import allExamples from './allExamples';
 import {View, Text, StyleSheet} from './react-native-web';
 
 class ExampleCard extends React.Component {
@@ -6,21 +9,27 @@ class ExampleCard extends React.Component {
     return (
       <View style={styles.card}>
         <ExampleHost code={this.props.code} />
+        <Link to={'/example/' + this.props.id}>
+          Check it out
+        </Link>
       </View>
     );
   }
 }
 
-var examples = [
-  require('raw!./examples/CenteredTextLabel'),
-  require('raw!./examples/ListViewItem'),
-];
-
 export default class ExamplesPage extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        {examples.map((code, idx) => <ExampleCard code={code} key={idx} />)}
+        {allExamples.map(
+          (code, idx) => (
+            <ExampleCard
+              id={idx}
+              key={idx}
+              code={code}
+            />
+          )
+        )}
       </View>
     );
   }
@@ -36,6 +45,8 @@ var styles = StyleSheet.create({
     backgroundColor: '#eee',
   },
   card: {
+    display: 'flex',
+    flexDirection: 'column',
     width: 300,
     height: 300,
     margin: 10,

@@ -1,3 +1,6 @@
+import React from 'react';
+
+window.React = React;
 import {View, StyleSheet} from './react-native-web';
 
 export default class ExampleHost extends React.Component {
@@ -71,12 +74,8 @@ var styles = StyleSheet.create({
     paddingTop: 20,
   },
   takeAllSpace: {
-    position: 'absolute',
-    left: 0,
-    top: 0,
-    bottom: 0,
-    right: 0,
-    overflow: 'hidden',
+    display: 'flex',
+    flex: 1,
   },
   error: {
     alignItems: 'center',

@@ -1,3 +1,5 @@
+import React from 'react'
+
 function fallback(value1, value2): any {
   if (typeof value1 !== 'undefined') {
     return value1;

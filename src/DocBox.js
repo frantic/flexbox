@@ -1,3 +1,4 @@
+import React from 'react'
 import docs from './docs';
 
 var DocBox = React.createClass({

@@ -1,3 +1,4 @@
+import React from 'react'
 import ExampleHost from './ExampleHost';
 import StatusBar from './StatusBar';
 import {Text, View, StyleSheet} from './react-native-web';
@@ -29,6 +30,7 @@ var styles = StyleSheet.create({
   phone: {
     position: 'relative',
     display: 'flex',
+    flexDirection: 'column',
     width: 320,
     height: 568,
     borderWidth: 1,
@@ -37,8 +39,5 @@ var styles = StyleSheet.create({
     borderRadius: 2,
     fontFamily: '"San Francisco", "Helvetica Neue", Helvetica, sans-serif',
     fontSize: 12,
-  },
-  innerFrame: {
-    paddingTop: StatusBar.height,
   },
 });
