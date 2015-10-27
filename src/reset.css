@@ -7,3 +7,7 @@ html, body {
   display: flex;
   height: 100%;
 }
+
+a, a:href, a:hover {
+  text-decoration: none;
+}
